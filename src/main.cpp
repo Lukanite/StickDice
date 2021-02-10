@@ -41,12 +41,12 @@ void rollDice() {
   char buf[STRING_BUF_LEN];
   M5.Lcd.fillScreen(BLACK);
   M5.Lcd.setTextColor(TFT_WHITE, TFT_BLACK);
-  M5.Axp.ScreenBreath(255);
+  M5.Axp.ScreenBreath(127);
   M5.Lcd.setTextSize(1);
   M5.Lcd.setTextDatum(TL_DATUM);
   snprintf(buf, sizeof(buf), "Roll #%i", rollCount + 1);
-  showBattery();
   M5.Lcd.drawString(buf, 0, 0, 2);
+  showBattery();
   M5.Lcd.setTextDatum(CC_DATUM);
   M5.Lcd.setTextColor(TFT_WHITE, TFT_BLACK);
   while (millis() - g_wom_last_millis < 1000) {
@@ -57,9 +57,7 @@ void rollDice() {
     M5.Lcd.drawString("Rolling...", 80, 40, 4);
     delay(500);
   }
-  M5.Lcd.fillScreen(BLACK);
-  snprintf(buf, sizeof(buf), "Roll #%i", rollCount + 1);
-  M5.Lcd.drawString(buf, 0, 0, 2);
+  M5.Lcd.fillRect(0, 20, 160, 70, TFT_BLACK);
   uint8_t dicea = random(6) + 1;
   uint8_t diceb = random(6) + 1;
   historyA[rollCount % HISTORY_COUNT] = dicea;
